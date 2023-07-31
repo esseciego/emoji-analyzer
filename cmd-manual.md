@@ -16,9 +16,9 @@
     * **search** _user_ 
 *  **EXAMPLES**
     * **search @beyonce**
-      <br> Found @beyonce in local database
+      <br> Found @beyonce in local database.
     * **search @doesnotexist**
-      <br> Could not find @doesnotexist in local database
+      <br> Could not find @doesnotexist in local database.
 *  **DEFAULTS**
     * N/A
 *  **OPTIONS**
@@ -36,25 +36,24 @@
 *  **DEFAULTS**
     * list : Lists all users in local database
 *  **OPTIONS**
-    * **-all** : Lists all users in local database
+    * **-all** : Lists all users in local database. 
 ---
 *  **NAME**
     * num : Displays number of data points in local dataset
 *  **SYNOPSIS**
     * **num** {_metric_} {_username_}
 *  **EXAMPLES**
-    * **num @uflorida**
-      <br> 7,968
+    * **num @beyonce**
+      <br> 8,542
     * **num --data-points**
-      <br> 20,658
+      <br> 25,000
     * **num --data-points -all**
-      <br> 20,658
-
+      <br> 25,000
 *  **DEFAULTS**
     * **num -d**, **num --data-points** : Displays total number of data points in database (num == 4 * postsCount)
 *  **OPTIONS**
-    * **-d**, **--data-points** : Displays number of datapoints
-    * **@_username_** : Displays value for a specified user
+    * **-d**, **--data-points** : Displays number of data-points in dataset
+    * **@_username_** : Displays value for a specified user. If user doesn't exist, prints error message and recommends "list" command.
     * **-all** : Displays number of data points for all users in local database
 
 ## 2. Analyzing Data
@@ -69,19 +68,19 @@
     <br> Displays @beyonce's top 20 posts with the most emojis used in caption and the number of emojis used
     * **mergesort** **-all** **--usage**
     <br> Displays top 20 posts from all users in local database's with the most emojis used in caption and the number of emojis used
-    * **mergesort** **-all** **--usage** **:red-heart:**
+    * **mergesort** **-all** **-u** **:red-heart:**
     <br> Displays top 20 posts from all users with the most red-heart emojis used in caption and the number of emoji appeared
-    * **mergesort** **-all** **--usage** **:red-heart:** **-r** **50** **-name**
+    * **mergesort** **-all** **-u** **:red-heart:** **-r** **50** **-name**
     <br> Displays top 20 posts from all users with the least red-heart emojis used in caption and the number of emoji appeared. Emojis are replaced by their shortname
 *  **DEFAULTS**
     * **mergesort {_username_} _metric_** : Displays first 20 sorted posts
 *  **OPTIONS**
-    * **@_username_** : Analyzes posts from specified user (if it exists in local database)
+    * **@_username_** : Analyzes posts from specified user. If user doesn't exist in database, print error message and recommends "list" command.
     * **-all** : Analyzes posts from all users in local database
     * **-u, --usage** : Sort posts by number of emojis used per post (emoji count per post >= 0)
-    * **-u _:emoji:_, --usage _:emoji:_**: Sorts posts by number of specified emoji used per post
-    * **-r** : Sorts posts in ascending/reverse order 
-    * **_n_** (positive int) : Print n posts to console 
+    * **-u _:emoji:_, --usage _:emoji:_**: Sorts posts by number of specified emoji used per post. If emoji doesn't exist in Unicode-16, prints error message and links to list of Unicode emojis  
+    * **-r, --reverse** : Sorts posts in ascending/reverse order 
+    * **_n_** (positive int) : Print n posts to console. If n exceeds number of posts, prints error message and number of posts a user has / in local database. 
     * **-name** : Prints English shortname for emoji instead of graphical representation 
 
 ---
