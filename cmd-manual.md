@@ -21,7 +21,7 @@
       <br> Could not find @doesnotexist in local database.
 *  **DEFAULTS**
     * N/A
-*  **OPTIONS**
+*  **FLAGS & OPTIONS**
     * N/A
 ---
 *  **NAME**
@@ -35,7 +35,7 @@
       <br> @shakira
 *  **DEFAULTS**
     * list : Lists all users in local database
-*  **OPTIONS**
+*  **FLAGS & OPTIONS**
     * **-all** : Lists all users in local database. 
 ---
 *  **NAME**
@@ -51,7 +51,7 @@
       <br> 25,000
 *  **DEFAULTS**
     * **num -d**, **num --data-points** : Displays total number of data points in database (num == 4 * postsCount)
-*  **OPTIONS**
+*  **FLAGS & OPTIONS**
     * **-d**, **--data-points** : Displays number of data-points in dataset
     * **@_username_** : Displays value for a specified user. If user doesn't exist, prints error message and recommends "list" command.
     * **-all** : Displays number of data points for all users in local database
@@ -74,7 +74,7 @@
     <br> Displays top 20 posts from all users with the least red-heart emojis used in caption and the number of emoji appeared. Emojis are replaced by their shortname
 *  **DEFAULTS**
     * **mergesort {_username_} _metric_** : Displays first 20 sorted posts
-*  **OPTIONS**
+*  **FLAGS & OPTIONS**
     * **@_username_** : Analyzes posts from specified user. If user doesn't exist in database, print error message and recommends "list" command.
     * **-all** : Analyzes posts from all users in local database
     * **-u, --usage** : Sort posts by number of emojis used per post (emoji count per post >= 0)
@@ -106,7 +106,7 @@
     * N/A
 *  **DEFAULTS**
     * N/A
-*  **OPTIONS**
+*  **FLAGS & OPTIONS**
     * N/A
 
 ---
@@ -118,5 +118,5 @@
     * N/A
 *  **DEFAULTS**
     * N/A
-*  **OPTIONS**
+*  **FLAGS & OPTIONS**
     * N/A
