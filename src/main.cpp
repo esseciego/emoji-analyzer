@@ -44,13 +44,15 @@ int main(int argc, char* argv[]) {
     std::string command = (std::string)(argv[i]);
 
     // Following arg = Options & positional arguments
-    i++;
+    // CLI ignores arguments after the appropriate
+
     if (command == "search") {
-        if (i >= argc) {
+        if (argc == 2) {
             std::cout << "Error: " << command << " needs an additional argument." << std::endl;
             exit(1);
         }
 
+        i++;
         std::string option = argv[i];   // IG username
         if (option.substr(0,7) == "-user=@") {
             std::string name = option.substr(7);
@@ -59,7 +61,7 @@ int main(int argc, char* argv[]) {
                 // std::cout << "@" << name << " was found in the local database!
             // else {
                 // std::cout << "@" << name << " was not found in the local database!
-                // std::cout << "Hint: Enter "list" to get the list of users in the local database
+                // std::cout << "Hint: Enter "list" to get the list of users in the local database.
             exit(0);
         }
         else {
@@ -73,20 +75,31 @@ int main(int argc, char* argv[]) {
         exit(0);
     }
 
-    else if (command == "num") {
-        std::string name = argv[i];
-        if (name == "-all") {
-            // Users.GetNumDataPoints
+    else if (command == "dpoints") {
+        if (argc == 2) {
+            // std::cout << users.GetNumDataPoints << std::endl;
+            std::cout << "GETTING ALL" << std::endl;
+            exit(0);
         }
-        else if (name[0] == '@') {
+
+        i++;
+        std::string option = argv[i];
+        if (option == "-all") {
+            // std::cout << users.GetNumDataPoints << std::endl;
+            std::cout << "GETTING ALL" << std::endl;
+            exit(0);
+        }
+        else if (option.substr(0,7) == "-user=@") {
+            std::string name = option.substr(7);
+            // User& user = Users.GetUser(name);
+            // std::cout << user.GetNumDataPoints << std::endl;
+            std::cout << "GETTING " << name << std::endl;
+            exit(0);
         }
         else {
-            // TODO: Remove dummy code
-            std::cout << "name: " << name << std::endl;
-            // User& user = Users.GetUser(name);
-            // user.GetNumDataPoints
+            std::cout << "Error: " << option << " is not a recognized option";
+            exit(1);
         }
-        exit(0);
     }
 
 
