@@ -25,7 +25,6 @@
         // Ex. C:\Users\spcie\CLionProjects\project-3-emoji\emoji-analyzer
     // 5. Click "Apply" and press "Okay" to save configuration
 
-
 int main(int argc, char* argv[]) {
     // Check help
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
@@ -47,16 +46,26 @@ int main(int argc, char* argv[]) {
     // Following arg = Options & positional arguments
     i++;
     if (command == "search") {
-        std::string name = argv[i];   // IG username
-        if (name[0] != '@') {
-            // Removes '@' symbol from username
-            name = name.substr(1);
+        if (i >= argc) {
+            std::cout << "Error: " << command << " needs an additional argument." << std::endl;
+            exit(1);
+        }
+
+        std::string option = argv[i];   // IG username
+        if (option.substr(0,7) == "-user=@") {
+            std::string name = option.substr(7);
             // search(name);
+            // if (search(name)) {
+                // std::cout << "@" << name << " was found in the local database!
+            // else {
+                // std::cout << "@" << name << " was not found in the local database!
+                // std::cout << "Hint: Enter "list" to get the list of users in the local database
+            exit(0);
         }
         else {
-            // search(name);
+            std::cout << "Error: " << option << " is not a recognized option";
+            exit(1);
         }
-        exit(0);
     }
 
     else if (command == "list") {
@@ -69,13 +78,11 @@ int main(int argc, char* argv[]) {
         if (name == "-all") {
             // Users.GetNumDataPoints
         }
-        else if (name[0] != '@') {
-            // Removes '@' symbol from arg
-            name = name.substr(1);
-            // User& user = Users.GetUser(name);
-            // user.GetNumDataPoints
+        else if (name[0] == '@') {
         }
         else {
+            // TODO: Remove dummy code
+            std::cout << "name: " << name << std::endl;
             // User& user = Users.GetUser(name);
             // user.GetNumDataPoints
         }
@@ -85,55 +92,56 @@ int main(int argc, char* argv[]) {
 
     else if (command == "sort") {
         std::string sortMeth;
-        std::string user;
-        bool flagUsage = false;
-        std::string usageVal;
-        bool flagReverse = false;
-        bool flagName = false;
+        std::string user = "all";
+        std::string metric = "usage";
+        std::string emoji = "none";
 
-        // Parses through argument options. Order of inserting options doesn't matter
-        while (i < argc) {
-            std::string option = (std::string)argv[i];
-            if (option == "-quick") {
-                sortMeth = "quick";
-            }
-            else if (option == "-merge") {
-                sortMeth = "merge";
-            }
-            else if (option == "-all") {
-                user = "all";
-            }
-            else if (option[0] == '@') {
-                user = option.substr(1);
-            }
-            else if (option == "-usage") {
-                flagUsage = true;
-            }
-            else if (option[0] == ':' && option[-1] == ':') {
-                usageVal = option;
-            }
-            else if (option == "-reverse") {
-                flagReverse = true;
-            }
-            else if (option == "-name") {
-                flagName = true;
-            }
-
-            else {
-                std::cout << "Error: " << option << "is not a recognised sorting method";
-                exit(1);
-            }
+        sortMeth = argv[i];   // sortMeth: Positional argument (needs to be entered after "sort")
+        if (sortMeth == "-quick") {
             i++;
+            while (i < argc) {   // Order of options + whether they're included in command is optional
+                std::string option = argv[i];
+                if (option == "-all") {
+                    user = "all";
+                }
+                else if (option[0] == '@') {
+                    user = option.substr(1);
+                }
+                else if (option == "-usage") {
+                    metric = "usage";
+                }
+                else if (option[0] == ':' && option[-1] == ':') {
+                    emoji = option;
+                }
+                else {
+                    std::cout << "Error: " << option << "is not a recognized option";
+                    exit(1);
+                }
+                i++;
+            }
+            // sort(sortMeth, user, metric, emoji)
 
+            // TODO: Remove dummy code
+            std::cout << "sortMeth: " << sortMeth << std::endl;
+            std::cout << "user: " << user << std::endl;
+            std::cout << "metric: " << metric << std::endl;
+            std::cout <<  "emoji: " << emoji << std::endl;
         }
-
+        else if (sortMeth == "-merge") {
+            i++;
+        }
+        else {
+            std::cout << "Error: " << sortMeth << "is not a recognized option";
+            exit(1);
+        }
     }
+
     else if (command == "man") {
         // parse.PrintManual():
     }
+
     else {
-        std::cout << "Error: " << command << " is not a recognised command.";
+        std::cout << "Error: " << command << " is not a recognized command.";
         exit(1);
     }
-
 }
