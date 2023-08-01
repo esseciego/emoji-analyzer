@@ -1,5 +1,6 @@
 #include <iostream>
-#include "../argspp/src/args.h"
+#include <cstring>
+
 
 // FILE STRUCTURE:
     // ../emoji-analyzer/
@@ -13,7 +14,7 @@
 // RUNNING PROGRAM IN COMMAND LINE:
     // 1. Change directory (cd) into "../emoji-analyzer"
         // ".." = Parent directory. Will vary depending on how you organize your files
-    // 2. To build executable in command line, enter "g++ --std=c++11 -g src/*.cpp argspp/src/args.cpp -o output/emo-yzer"
+    // 2. To build executable in command line, enter "g++ --std=c++11 -g src/*.cpp -o output/emo-yzer.ex"
     // 3. To run executable, enter "./output/emo-yzer <commands>"
 
 // DEBUGGING PROGRAM IN CLION:
@@ -24,42 +25,115 @@
         // Ex. C:\Users\spcie\CLionProjects\project-3-emoji\emoji-analyzer
     // 5. Click "Apply" and press "Okay" to save configuration
 
-using namespace args;
 
 int main(int argc, char* argv[]) {
-    // Creates parser instance
-    ArgParser parser;
-    parser.helptext = "The Emoji Analyzer";
+    // Check help
+    if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
+        std::cout << "Project 3: The Emoji Analyzer, Summer 2023" << std::endl;
+        std::cout << "Usage:" << std::endl;
+        std::cout << "\t./output/emo-yzer.ex [command] [option] [...]" << std::endl;
+    }
 
-    // Registers commands, options, and flags
-        // Options = Take in a value
-            // Can be seperated by a space (ex. --opt 123) or equals symbol (--opt 123)
-        // Flags = Take no values
+    // Dummy code, remove later
+    std::cout << std::endl;
+    for (int k = 0; k < argc; k++) {
+        std::cout << "argv[" << k << "]: " << (std::string) argv[k] << std::endl;
+    }
 
-    // FIXME: Not sure how to parse positional arguments (option's values)
-    // FIXME: Not sure how to parse arguments starting with '-'
+    // 1st arg = Command
+    int i = 1;
+    std::string command = (std::string)(argv[i]);
 
-    parser.command("search");
-    parser.option("user");
+    // Following arg = Options & positional arguments
+    i++;
+    if (command == "search") {
+        std::string name = argv[i];   // IG username
+        if (name[0] != '@') {
+            // Removes '@' symbol from username
+            name = name.substr(1);
+            // search(name);
+        }
+        else {
+            // search(name);
+        }
+        exit(0);
+    }
 
-    parser.command("list");
-    parser.option("all");
+    else if (command == "list") {
+        // list()
+        exit(0);
+    }
 
-    parser.command("num");
-    parser.option("points");
+    else if (command == "num") {
+        std::string name = argv[i];
+        if (name == "-all") {
+            // Users.GetNumDataPoints
+        }
+        else if (name[0] != '@') {
+            // Removes '@' symbol from arg
+            name = name.substr(1);
+            // User& user = Users.GetUser(name);
+            // user.GetNumDataPoints
+        }
+        else {
+            // User& user = Users.GetUser(name);
+            // user.GetNumDataPoints
+        }
+        exit(0);
+    }
 
-    parser.command("sort");
-    parser.flag("merge");
-    parser.flag("quick");
-    parser.flag("usage");
-    parser.flag("reverse");
-    parser.flag("name");
 
-    parser.command("man");
+    else if (command == "sort") {
+        std::string sortMeth;
+        std::string user;
+        bool flagUsage = false;
+        std::string usageVal;
+        bool flagReverse = false;
+        bool flagName = false;
 
-    // Parse array of string arguments
-    parser.parse(argc, argv);
+        // Parses through argument options. Order of inserting options doesn't matter
+        while (i < argc) {
+            std::string option = (std::string)argv[i];
+            if (option == "-quick") {
+                sortMeth = "quick";
+            }
+            else if (option == "-merge") {
+                sortMeth = "merge";
+            }
+            else if (option == "-all") {
+                user = "all";
+            }
+            else if (option[0] == '@') {
+                user = option.substr(1);
+            }
+            else if (option == "-usage") {
+                flagUsage = true;
+            }
+            else if (option[0] == ':' && option[-1] == ':') {
+                usageVal = option;
+            }
+            else if (option == "-reverse") {
+                flagReverse = true;
+            }
+            else if (option == "-name") {
+                flagName = true;
+            }
 
-    // Prints parser's state to stdout
-    parser.print();
+            else {
+                std::cout << "Error: " << option << "is not a recognised sorting method";
+                exit(1);
+            }
+            i++;
+
+        }
+
+    }
+    else if (command == "man") {
+        // parse.PrintManual():
+    }
+    else {
+        std::cout << "Error: " << command << " is not a recognised command.";
+        exit(1);
+    }
+
 }
