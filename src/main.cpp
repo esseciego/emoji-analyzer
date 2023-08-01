@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
         std::cout << "Project 3: The Emoji Analyzer, Summer 2023" << std::endl;
         std::cout << "Usage:" << std::endl;
-        std::cout << "\t./output/emo-yzer.ex [command] [option] [...]" << std::endl;
+        std::cout << "\t./output/emo-yzer.ex <command> <option> <...>" << std::endl;
     }
 
     // Dummy code, remove later
@@ -78,7 +78,6 @@ int main(int argc, char* argv[]) {
     else if (command == "dpoints") {
         if (argc == 2) {
             // std::cout << users.GetNumDataPoints << std::endl;
-            std::cout << "GETTING ALL" << std::endl;
             exit(0);
         }
 
@@ -86,14 +85,12 @@ int main(int argc, char* argv[]) {
         std::string option = argv[i];
         if (option == "-all") {
             // std::cout << users.GetNumDataPoints << std::endl;
-            std::cout << "GETTING ALL" << std::endl;
             exit(0);
         }
         else if (option.substr(0,7) == "-user=@") {
             std::string name = option.substr(7);
             // User& user = Users.GetUser(name);
             // std::cout << user.GetNumDataPoints << std::endl;
-            std::cout << "GETTING " << name << std::endl;
             exit(0);
         }
         else {
@@ -104,47 +101,86 @@ int main(int argc, char* argv[]) {
 
 
     else if (command == "sort") {
+        // Positional argument: Needs to be entered after "sort" command
         std::string sortMeth;
+
+        // Default option values
+            // Order of options can vary + Whether they're included in argv is optional
         std::string user = "all";
         std::string metric = "usage";
         std::string emoji = "none";
+        int lines = 10;
 
-        sortMeth = argv[i];   // sortMeth: Positional argument (needs to be entered after "sort")
-        if (sortMeth == "-quick") {
+        if (argc == 2) {
+            std::cout << "Error: " << command << " needs an additional argument." << std::endl;
+            exit(1);
+        }
+
+        i++;
+        sortMeth = argv[i];
+        if (sortMeth == "-quick" || sortMeth == "-merge") {
+            if (sortMeth == "-quick") {
+                sortMeth = "quick";
+            }
+            else if (sortMeth == "-merge") {
+                sortMeth = "merge";
+            }
+
+            if (argc == 3) {
+                // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji);
+                // print(sortedCap);
+                std::cout << "sortMeth: " << sortMeth << std::endl;
+                std::cout << "user: " << user << std::endl;
+                std::cout << "metric: " << metric << std::endl;
+                std::cout << "emoji: " << emoji << std::endl;
+                std::cout << "lines: " << lines << std::endl;
+                exit(0);
+            }
+
             i++;
-            while (i < argc) {   // Order of options + whether they're included in command is optional
+            while (i < argc) {
                 std::string option = argv[i];
                 if (option == "-all") {
                     user = "all";
                 }
-                else if (option[0] == '@') {
-                    user = option.substr(1);
+                else if (option.substr(0,7) == "-user=@") {
+                    user = option.substr(7);
                 }
                 else if (option == "-usage") {
                     metric = "usage";
                 }
-                else if (option[0] == ':' && option[-1] == ':') {
-                    emoji = option;
+                else if (option.substr(0,7) == "-emoji=") {
+                    emoji = option.substr(7);
+                }
+                else if (option.substr(0,7) == "-lines=") {
+                    try {
+                        std::string value = option.substr(7);
+                        lines = std::stoi((std::string)value);
+                    }
+                    catch (std::invalid_argument& e){
+                        std::cout << "Error: Invalid option value for " << option.substr(0,7) << std::endl;
+                        exit(1);
+                    }
                 }
                 else {
-                    std::cout << "Error: " << option << "is not a recognized option";
+                    std::cout << "Error: " << option << " is not a recognized option";
                     exit(1);
                 }
                 i++;
             }
-            // sort(sortMeth, user, metric, emoji)
+            // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji)
+            // print(sortedCap);
 
             // TODO: Remove dummy code
             std::cout << "sortMeth: " << sortMeth << std::endl;
             std::cout << "user: " << user << std::endl;
             std::cout << "metric: " << metric << std::endl;
-            std::cout <<  "emoji: " << emoji << std::endl;
-        }
-        else if (sortMeth == "-merge") {
-            i++;
+            std::cout << "emoji: " << emoji << std::endl;
+            std::cout << "lines: " << lines << std::endl;
+            exit(0);
         }
         else {
-            std::cout << "Error: " << sortMeth << "is not a recognized option";
+            std::cout << "Error: " << sortMeth << " is not a recognized sorting method";
             exit(1);
         }
     }
