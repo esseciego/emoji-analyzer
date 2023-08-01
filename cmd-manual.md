@@ -13,16 +13,16 @@
 *  **NAME**
     * search : Checks if user exists in local database
 *  **SYNOPSIS**
-    * **search** _user_ 
+    * **search** {_user_}
 *  **EXAMPLES**
-    * **search @beyonce**
+    * **search -user=@beyonce**
       <br> Found @beyonce in local database.
-    * **search @doesnotexist**
+    * **search -user=@doesnotexist**
       <br> Could not find @doesnotexist in local database.
 *  **DEFAULTS**
     * N/A
 *  **FLAGS & OPTIONS**
-    * N/A
+    * **-user=** : Specifies user to lookup
 ---
 *  **NAME**
     * list : Lists users in local database
@@ -36,64 +36,56 @@
 *  **DEFAULTS**
     * list : Lists all users in local database
 *  **OPTIONS**
-    * **-all** : Lists all users in local database. 
+    * N/A
 ---
 *  **NAME**
-    * num : Displays number of data points in local dataset
+    * dpoints : Displays number of data points in local dataset
 *  **SYNOPSIS**
-    * **num** {_metric_} {_username_}
+    * **dpoints** {_username_}
 *  **EXAMPLES**
-    * **num @beyonce**
-      <br> 8,542
-    * **num --data-points**
+    * **dpoints**
       <br> 25,000
-    * **num --data-points -all**
+    * **dpoints -all**
       <br> 25,000
+    * **dpoints -user=@beyonce**
+     <br> 8,542
 *  **DEFAULTS**
-    * **num -d**, **num --data-points** : Displays total number of data points in database (num == 4 * postsCount)
+    * **dpoints** : Displays total data points in local dataset 
 *  **OPTIONS**
-    * **-d**, **--data-points** : Displays number of data-points in dataset
-    * **@_username_** : Displays value for a specified user. If user doesn't exist, prints error message and recommends "list" command.
+    * **-user=@{_user_}**: Displays value for a specified user. If user doesn't exist, prints error.
     * **-all** : Displays number of data points for all users in local database
 
 ## 2. Analyzing Data
 
 ---
 *  **NAME**
-    * mergesort : Displays lists of posts and their emoji usage
+    * sort : Displays sorted lists of posts and the time complexity used to sort posts
 *  **SYNOPSIS**
-    * **mergesort** **{_username_}** **_metric_** {sorting order} {_lines to display_} {short name} 
+    * sort {**sorting method**} {_username_} {_metric_} {_emoji_} {_lines-to-display_} 
 *  **EXAMPLES**
-    * **mergesort** **@beyonce** **--usage** 
-    <br> Displays @beyonce's top 20 posts with the most emojis used in caption and the number of emojis used
-    * **mergesort** **-all** **--usage**
-    <br> Displays top 20 posts from all users in local database's with the most emojis used in caption and the number of emojis used
-    * **mergesort** **-all** **-u** **:red-heart:**
-    <br> Displays top 20 posts from all users with the most red-heart emojis used in caption and the number of emoji appeared
-    * **mergesort** **-all** **-u** **:red-heart:** **-r** **50** **-name**
-    <br> Displays top 20 posts from all users with the least red-heart emojis used in caption and the number of emoji appeared. Emojis are replaced by their shortname
+    * **sort -merge -all**
+    <br> Displays top 20 posts with the most number of emojis used in a caption, analyzing all users in local database and sorting captions
+    using mergesort. The first column displayed is the caption and the second column is the number of emojis in the caption. 
+    * **sort -merge -user=@beyonce**
+    <br> Displays @beyonce's top 20 posts with the most emojis used in caption and the number of emojis used in the caption
+    * **sort -merge -user=@beyonce -emoji=red-heart**
+    <br> Displays @beyonce's top 20 posts with the most red-heart emojis used in caption and the number of times the heart-emoji was used in the caption
+    * **sort -merge -user=@beyonce -emoji=red-heart 50**
+    <br> Displays @beyonce's top 20 posts with the most red-heart emojis used in caption and the number of times the heart-emoji was used in the caption
 *  **DEFAULTS**
-    * **mergesort {_username_} _metric_** : Displays first 20 sorted posts
+    * user_name = all
+    * metric = usage
+    * emoji = none
+    * lines-to-display = 20
 *  **OPTIONS**
-    * **@_username_** : Analyzes posts from specified user. If user doesn't exist in database, print error message and recommends "list" command.
+    * **-merge** : Performs mergesort on captions
+    * **-quick** : Performs quicksort on captions
     * **-all** : Analyzes posts from all users in local database
-    * **-usage** : Sort posts by number of emojis used per post (emoji count per post >= 0)
-    * **-usage _:emoji:_**: Sorts posts by number of specified emoji used per post. If emoji doesn't exist in Unicode-16, prints error message and links to list of Unicode emojis  
-    * **-reverse** : Sorts posts in ascending/reverse order 
-    * **mergesort [...] _n_** (positive int) : Print n posts to console. If n exceeds number of posts, prints error message and number of posts a user has / in local database. 
-    * **-name** : Prints English shortname for emoji instead of graphical representation 
-
+    * **-user=@{_user_}** : Analyzes posts from specified user. If user doesn't exist in database, prints error message and recommends list command
+    * **-usage** : Sorts captions the number of emojis used in post
+    * **-emoji={_emoji_}** : Specifies emoji to sort by. If emoji doesn't exist, prints error message.
+    * **-lines={_int_}** : Specifies number of lines. If option value is not a positive integer, prints error message. 
 ---
-*  **NAME**
-    * quicksort : Displays sorted emojis and their specified metric value using merge sort
-*  **SYNOPSIS**
-    * **mergesort** **{_username_}** **_metric_** {sorting order} {_lines to display_} {short name}
-*  **EXAMPLES**
-    * See quicksort
-*  **DEFAULTS**
-    * See quicksort
-*  **OPTIONS**
-    * See quicksort
 
 ## 3. Getting Help
 

@@ -58,10 +58,10 @@ int main(int argc, char* argv[]) {
             std::string name = option.substr(7);
             // search(name);
             // if (search(name)) {
-                // std::cout << "@" << name << " was found in the local database!
+                // std::cout << "Found "@" << name << " in local database." << std::endl;
             // else {
-                // std::cout << "@" << name << " was not found in the local database!
-                // std::cout << "Hint: Enter "list" to get the list of users in the local database.
+                // std::cout << "Could not find @" << name << " in local database." << std::endl;
+                // std::cout << "Hint: Enter "list" in command line to get a list of all the users in local database;
             exit(0);
         }
         else {
@@ -89,7 +89,12 @@ int main(int argc, char* argv[]) {
         }
         else if (option.substr(0,7) == "-user=@") {
             std::string name = option.substr(7);
-            // User& user = Users.GetUser(name);
+            // if (!users.Find(users)) {
+            //     std::cout << "Error: Could not find " << name << "in local database" << std::endl;
+            //     std::cout << "Hint: Enter "list" in command line to get a list of all the users in local database;
+            //     exit(0);
+            // }
+            // User& user = users.GetUser(name);
             // std::cout << user.GetNumDataPoints << std::endl;
             exit(0);
         }
@@ -156,6 +161,10 @@ int main(int argc, char* argv[]) {
                     try {
                         std::string value = option.substr(7);
                         lines = std::stoi((std::string)value);
+                        if (lines < 1) {
+                            throw std::invalid_argument("Error: Invalid option value for " + option.substr(0,7) + '\n');
+                            exit(1);
+                        }
                     }
                     catch (std::invalid_argument& e){
                         std::cout << "Error: Invalid option value for " << option.substr(0,7) << std::endl;
@@ -186,7 +195,8 @@ int main(int argc, char* argv[]) {
     }
 
     else if (command == "man") {
-        // parse.PrintManual():
+        // std::string man= <manual text>
+        // std::cout << man;
     }
 
     else {
