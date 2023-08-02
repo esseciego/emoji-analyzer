@@ -146,40 +146,6 @@ int main(int argc, char* argv[]) {
                 exit(0);
             }
 
-            i++;
-            while (i < argc) {
-                std::string option = argv[i];
-                if (option == "-all") {
-                    user = "all";
-                }
-                else if (option.substr(0,7) == "-user=@") {
-                    user = option.substr(7);
-                }
-                else if (option == "-usage") {
-                    metric = "usage";
-                }
-                else if (option.substr(0,7) == "-emoji=") {
-                    emoji = option.substr(7);
-                }
-                else if (option.substr(0,7) == "-lines=") {
-                    try {
-                        std::string value = option.substr(7);
-                        lines = std::stoi((std::string)value);
-                        if (lines < 1) {
-                            throw std::invalid_argument("Error: Invalid option value for " + option.substr(0,7) + '\n');
-                        }
-                    }
-                    catch (std::invalid_argument& e){
-                        std::cout << "Error: Invalid option value for " << option.substr(0,7) << std::endl;
-                        exit(1);
-                    }
-                }
-                else {
-                    std::cout << "Error: " << option << " is not a recognized option";
-                    exit(1);
-                }
-                i++;
-            }
             // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji)
             // print(sortedCap);
             exit(0);

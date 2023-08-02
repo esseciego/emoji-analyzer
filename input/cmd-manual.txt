@@ -58,21 +58,14 @@
 > NAME
     >> sort : Displays sorted lists of posts and the time complexity used to sort posts
 > SYNOPSIS
-    >> sort {sorting method} {username} {metric} {emoji} {lines-to-display}
+    >> sort {sorting method}
 > EXAMPLES
-    >> sort -merge -all
+    >> sort -merge
        (Displays top 20 posts with the most number of emojis used in a caption, analyzing all users in local database
        and sorting captions using mergesort. The first column displayed is the caption and the second column
-       is the number of emojis in the caption)
-    >> sort -merge -user=@beyonce
-       (Displays @beyonce's top 20 posts with the most emojis used in caption and the number of emojis used in
-       the caption)
-    >> sort -merge -user=@beyonce -emoji=red-heart
-       (Displays @beyonce's top 20 posts with the most red-heart emojis used in caption and the number of times the
-       heart-emoji was used in the caption)
-    >> sort -merge -user=@beyonce -emoji=red-heart 50
-       (Displays @beyonce's top 20 posts with the most red-heart emojis used in caption and the number of times the
-       heart-emoji was used in the caption)
+       is the number of emojis in the caption. At the end of the list, displays milliseconds elapsed to perform quicksort)
+    >> sort -quick
+       (Same displays as "-merge" but performs quicksort instead)
 > DEFAULTS
     >> user_name = all
     >> metric = usage
@@ -81,12 +74,6 @@
 > OPTIONS
     >> -merge : Performs mergesort on captions
     >> -quick : Performs quicksort on captions
-    >> -all : Analyzes posts from all users in local database
-    >> -user=@{user} : Analyzes posts from specified user. If user doesn't exist in database, prints error message and
-       recommends list command
-    >> -usage : Sorts captions the number of emojis used in post
-    >> -emoji={emoji} : Specifies emoji to sort by. If emoji doesn't exist, prints error message
-    >> -lines={int} : Specifies number of lines. If option value is not a positive integer, prints error message
 
 // -----------------------------------------------------------------------------
 // 3. Getting help
