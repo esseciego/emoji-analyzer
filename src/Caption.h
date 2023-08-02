@@ -4,6 +4,8 @@
 #include <string>
 #include <fstream>
 
+
+
 class Caption {
 	
 	private:
@@ -14,19 +16,31 @@ class Caption {
 
 
 	public:
-
-	Caption();
-	std::vector<std::string> getEmojis() { return emojis; }
-	int getNumEmojis() { return emojis.size(); }
-	std::string getUsername() { return username; }
-	std::string getPost() { return post; }
-
 	
+	// Parametrized constructor for Caption class
+	Caption(std::vector<std::string> emojis, std::string username, std::string post);
+
+	// Return the emojis vector
+	std::vector<std::string> getEmojis();
+
+	// Return the number of emojis
+	int getNumEmojis();
+
+	// Return the username
+	std::string getUsername();
+
+	// Return the post
+	std::string getPost();
+	
+	// Set the emojis vector
+	void setEmojis(std::vector<std::string> emojis);
+
+	// Set the username
+	void setUsername(std::string username);
+
+	// Set the post
+	void setPost(std::string post);
 	
 };
 
 
-std::vector<Caption> LoadCaptions(std::fstream& file);
-void mergeSort(std::vector<Caption> captions, int left, int right);
-void merge(std::vector<Caption> captions, int left, int mid, int right);
-void quickSort(std::vector<Caption> captions, int low, int high);

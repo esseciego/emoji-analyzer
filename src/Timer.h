@@ -4,7 +4,7 @@
 
 struct Timer {
 	
-	std::chrono::time_point<std::chrono::steady_clock> begin, end;
+	std::chrono::time_point<std::chrono::high_resolution_clock> begin, end;
 	std::chrono::duration<float> duration;
 
 	void start() {
