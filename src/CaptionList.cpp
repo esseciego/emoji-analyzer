@@ -27,37 +27,41 @@ void CaptionList::mergeSort() {
 	
 	Timer timer;
 	timer.start();
-	mergeSort(captions, 0, 0);
+	mergeSortAlgorithm(captions, 0, 0);
 	time = timer.stop();
 }
 
 // Sort the captions vector using QuickSort algorithm
 void CaptionList::quickSort() {
-
+	
+	Timer timer;
+	timer.start();
+	quickSortAlgorithm(captions, 0, 0);
+	time = timer.stop();
 }
 
 // Return the captions vector
 std::vector<Caption> CaptionList::getCaptions() {
-
+	return captions;
 }
 
 // Return the time it took for the last used sorting algorithm
 // to run.
 float CaptionList::getTime() {
-
+	return time;
 }
 
 
 
 /**************************************************************************************************/
 /************************ CaptionList Helper Functions *****************************/
-void mergeSort(std::vector<Caption> captions, int left, int right) {
+void mergeSortAlgorithm(std::vector<Caption> captions, int left, int right) {
 	
 	if (left < right) {
 		
 		int mid = left + (right - left) / 2;
-		mergeSort(captions, left, mid);
-		mergeSort(captions, mid + 1, right);
+		mergeSortAlgorithm(captions, left, mid);
+		mergeSortAlgorithm(captions, mid + 1, right);
 
 		merge(captions, left, mid, right);
 	}
@@ -116,8 +120,8 @@ void quickSort(std::vector<Caption> captions, int low, int high) {
 	
 	if (low < high) {
 		int pivot = partition(captions, low, high);
-		quickSort(captions, low, pivot - 1);
-		quickSort(captions, pivot + 1, high);
+		quickSortAlgorithm(captions, low, pivot - 1);
+		quickSortAlgorithm(captions, pivot + 1, high);
 	}
 }
 

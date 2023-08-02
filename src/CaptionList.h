@@ -29,8 +29,8 @@ class CaptionList {
 	float getTime();
 };
 
-void mergeSort(std::vector<Caption> captions, int left, int right);
+void mergeSortAlgorithm(std::vector<Caption> captions, int left, int right);
 void merge(std::vector<Caption> captions, int left, int mid, int right);
-void quickSort(std::vector<Caption> captions, int low, int high);
+void quickSortAlgorithm(std::vector<Caption> captions, int low, int high);
 int partition(std::vector<Caption> captions, int low, int high);
 void swap(Caption* a, Caption* b);
