@@ -16,8 +16,9 @@ CaptionList::CaptionList(std::string filename) {
 	std::fstream file(filename);
 
 	if (!file.is_open()) {
-		std::cout << "CSV file could not be opened" << std::endl;
+		std::cout << "Captions file could not be opened" << std::endl;
 	}
+
 
 
 }
