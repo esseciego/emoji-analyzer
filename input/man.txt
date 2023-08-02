@@ -1,0 +1,115 @@
+// -----------------------------------------------------------------------------
+// THE EMOJI-ANALYZER: COMMAND MANUAL
+// -----------------------------------------------------------------------------
+
+// -----------------------------------------------------------------------------
+// 1. Managing Local Database
+// -----------------------------------------------------------------------------
+
+> NAME
+    >> search : Checks if user exists in local database
+> SYNOPSIS
+    >> search {user}
+> EXAMPLES
+    >> search -user=@beyonce
+       Found @beyonce in local database.
+    >> search -user=@doesnotexist
+        Could not find @doesnotexist in local database.
+> DEFAULTS
+    >> N/A
+> FLAGS & OPTIONS
+    >> -user= : Specifies user to lookup
+
+> NAME
+    >> list : Lists users in local database
+> SYNOPSIS
+    >> list
+> EXAMPLES
+    >> list
+       @beyonce
+       @nickiminaj
+       @shakira
+> DEFAULTS
+    >> list : Lists all users in local database
+> OPTIONS
+    >> N/A
+
+> NAME
+    >> dpoints : Displays number of data points in local dataset
+> SYNOPSIS
+    >> dpoints {username}
+> EXAMPLES
+    >> dpoints
+       25,000
+    >> dpoints -all
+       25,000
+    >> dpoints -user=@beyonce
+       8,542
+> DEFAULTS
+    >> dpoints : Displays total data points in local dataset
+> OPTIONS
+    >> -user=@{user}: Displays value for a specified user. If user doesn't exist, prints error
+    >> -all : Displays number of data points for all users in local database
+
+// -----------------------------------------------------------------------------
+// 2. Analyzing Data
+// -----------------------------------------------------------------------------
+
+> NAME
+    >> sort : Displays sorted lists of posts and the time complexity used to sort posts
+> SYNOPSIS
+    >> sort {sorting method} {username} {metric} {emoji} {lines-to-display}
+> EXAMPLES
+    >> sort -merge -all
+       (Displays top 20 posts with the most number of emojis used in a caption, analyzing all users in local database
+       and sorting captions using mergesort. The first column displayed is the caption and the second column
+       is the number of emojis in the caption)
+    >> sort -merge -user=@beyonce
+       (Displays @beyonce's top 20 posts with the most emojis used in caption and the number of emojis used in
+       the caption)
+    >> sort -merge -user=@beyonce -emoji=red-heart
+       (Displays @beyonce's top 20 posts with the most red-heart emojis used in caption and the number of times the
+       heart-emoji was used in the caption)
+    >> sort -merge -user=@beyonce -emoji=red-heart 50
+       (Displays @beyonce's top 20 posts with the most red-heart emojis used in caption and the number of times the
+       heart-emoji was used in the caption)
+> DEFAULTS
+    >> user_name = all
+    >> metric = usage
+    >> emoji = none
+    >> lines-to-display = 20
+> OPTIONS
+    >> -merge : Performs mergesort on captions
+    >> -quick : Performs quicksort on captions
+    >> -all : Analyzes posts from all users in local database
+    >> -user=@{user} : Analyzes posts from specified user. If user doesn't exist in database, prints error message and
+       recommends list command
+    >> -usage : Sorts captions the number of emojis used in post
+    >> -emoji={emoji} : Specifies emoji to sort by. If emoji doesn't exist, prints error message
+    >> -lines={int} : Specifies number of lines. If option value is not a positive integer, prints error message
+
+// -----------------------------------------------------------------------------
+// 3. Getting help
+// -----------------------------------------------------------------------------
+
+> NAME
+    >> man : Displays command manual
+> SYNOPSIS
+    >> man
+> EXAMPLES
+    >> N/A
+> DEFAULTS
+    >> N/A
+> FLAGS & OPTIONS
+    >> N/A
+
+> NAME
+    >> --help : Displays program's description and purpose
+> SYNOPSIS
+    >> (no arguments), --help
+> EXAMPLES
+    >> N/A
+> DEFAULTS
+    >> N/A
+> OPTIONS
+    >> N/A

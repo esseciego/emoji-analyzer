@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring>
+#include <fstream>
 
 
 // FILE STRUCTURE:
@@ -14,8 +14,8 @@
 // RUNNING PROGRAM IN COMMAND LINE:
     // 1. Change directory (cd) into "../emoji-analyzer"
         // ".." = Parent directory. Will vary depending on how you organize your files
-    // 2. To build executable in command line, enter "g++ --std=c++11 -g src/*.cpp -o output/emo-yzer.ex"
-    // 3. To run executable, enter "./output/emo-yzer <commands>"
+    // 2. To build executable in command line, enter "g++ --std=c++11 -g src/*.cpp -o output/emo-yzer.exe"
+    // 3. To run executable, enter "./output/emo-yzer.exe <commands>"
 
 // DEBUGGING PROGRAM IN CLION:
     // 1. Next to the hammer/build button, click on the "<your project title> | Debug" button
@@ -28,9 +28,9 @@
 int main(int argc, char* argv[]) {
     // Check help
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
-        std::cout << "Project 3: The Emoji Analyzer, Summer 2023" << std::endl;
-        std::cout << "Usage:" << std::endl;
-        std::cout << "\t./output/emo-yzer.ex <command> <option> <...>" << std::endl;
+        std::cout << "THE EMOJI-ANALYZER" << std::endl;
+        std::cout << "An Instagram post analyzer" << std::endl;
+        std::cout << "To get started, enter \"man\" in command line to get a list of commands" << std::endl;
     }
 
     // Dummy code, remove later
@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
                 sortMeth = "merge";
             }
 
-            if (argc == 3) {
+            if (argc == 3) {   // ex. "./emo-yzer.exe sort -merge"
                 // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji);
                 // print(sortedCap);
                 std::cout << "sortMeth: " << sortMeth << std::endl;
@@ -195,7 +195,6 @@ int main(int argc, char* argv[]) {
     }
 
     else if (command == "man") {
-        // std::string man= <manual text>
         // std::cout << man;
     }
 
