@@ -11,7 +11,7 @@ wb = openpyxl.load_workbook(fname)
 sheet = wb.get_sheet_by_name('50aTime')
 
 #https://www.regextester.com/106421
-for rowOfCellObjects in sheet['A1':'A18956']:
+for rowOfCellObjects in sheet['A2':'A18956']:
   for cellObj in rowOfCellObjects:
     #Iterate through each cell in the range
     line = cellObj.value
@@ -24,8 +24,7 @@ for rowOfCellObjects in sheet['A1':'A18956']:
     final = re.findall(":+([^@][^#][^:]+):", textonlyEmojis)
     data.append(final)
 
-
 #exports to excel
 df = pd.DataFrame(data)
-with pd.ExcelWriter('Spreadsheet(COPY).xlsx', mode='a') as writer:
+with pd.ExcelWriter('Data.xlsx', mode='a') as writer:
   df.to_excel(writer)
