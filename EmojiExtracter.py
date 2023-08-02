@@ -10,6 +10,7 @@ fname = 'Spreadsheet.xlsx'
 wb = openpyxl.load_workbook(fname)
 sheet = wb.get_sheet_by_name('50aTime')
 
+#https://www.regextester.com/106421
 for rowOfCellObjects in sheet['A1':'A18956']:
   for cellObj in rowOfCellObjects:
     #Iterate through each cell in the range
@@ -23,22 +24,7 @@ for rowOfCellObjects in sheet['A1':'A18956']:
     final = re.findall(":+([^@][^#][^:]+):", textonlyEmojis)
     data.append(final)
 
-# raw_data = emoji.demojize("🤔 🙈 me así, se 😌 ds 💕👭👙 hello 👩🏾‍🎓 emoji hello 👨‍👩‍👦‍👦 how are 😊 you today🙅🏽🙅🏽")
-# onlyEmojis = re.findall(":+([^:]+):",raw_data)
-#REGEX to extract emojis
-#:+([^:]+):
-#:+([^@][^#][^:]+):
 
-# for i in data:
-#   print(i)
-
-# wb = openpyxl.Workbook()
-# sheet = wb.active
-
-#
-# for i in range(1,20):
-#   if (data[(i-1)] != []):
-#     sheet.cell(row = i, column = 8).value = data[(i-1)][0]
 #exports to excel
 df = pd.DataFrame(data)
 with pd.ExcelWriter('Spreadsheet(COPY).xlsx', mode='a') as writer:
