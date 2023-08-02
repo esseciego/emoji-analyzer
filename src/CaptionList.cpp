@@ -1,6 +1,7 @@
 #include "CaptionList.h"
 #include "Caption.h"
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include "Timer.h"
@@ -13,14 +14,38 @@
 // Parametrized CaptionList constructor
 CaptionList::CaptionList(std::string filename) {
 	
-	std::fstream file(filename);
+	std::ifstream file(filename);
 
 	if (!file.is_open()) {
 		std::cout << "Captions file could not be opened" << std::endl;
 	}
+	
+	int postIndx = 0, userIndx= 1, emojisIndx = 5;
 
+	std::vector<std::string> row;
+	std::string line, cell, temp;
 
+	while (file >> temp) {
+		
+		row.clear();
+		std::getline(file, line);
+		std::stringstream ss(line);
 
+		while (std::getline(ss, cell, ',')) {
+			row.push_back(cell);
+		}
+		
+		std::vector<std::string> emojis;
+
+		for (int i = emojisIndx; i < row.size(); i++) {
+			emojis.push_back(row.at(i));
+		}
+
+		Caption newCaption(emojis, row.at(userIndx), row.at(postIndx));
+		captions.push_back(newCaption);
+	}
+	
+	file.close();
 }
 
 // Sort the captions vector using MergeSort algorithm
