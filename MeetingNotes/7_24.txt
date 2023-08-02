@@ -1,0 +1,67 @@
+Functionality
+	
+	Target audience
+		
+		Influencers
+
+		Marketing
+
+		New users
+
+	Reasons for using our program
+
+		posts not getting enough traction
+
+		curiosity
+
+	Learn how the number of emojis affect engagement
+
+
+
+CLI
+
+	Welcome screen
+		
+		Menu of commands
+
+			Add user
+
+				Prompt user name
+
+			Search user
+
+				Prompt user name
+
+					User found
+
+						Analytics Menu
+
+							sort 1 - mergesort
+
+								emojis with top number of likes on post
+
+								emojis with top number of comments on post
+
+								emojis in top number of posts
+							
+							sort 2 - ?
+								
+
+
+
+
+					User not found
+
+			Search hashtag
+
+				Prompt hashtag
+				
+					Hashtag found
+
+					Hashtag not found
+
+			List possible users
+
+				Print all users in database, then print CLI menu
+
+			
