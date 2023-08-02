@@ -1,6 +1,6 @@
 #include <iostream>
-#include <fstream>
 
+#include "ArgParser.h"
 
 // FILE STRUCTURE:
     // ../emoji-analyzer/
@@ -25,11 +25,15 @@
         // Ex. C:\Users\spcie\CLionProjects\project-3-emoji\emoji-analyzer
     // 5. Click "Apply" and press "Okay" to save configuration
 
+
 int main(int argc, char* argv[]) {
+    ArgParser parser;
+    parser.ReadManual("input/cmd-manual.txt");
+
     // Check help
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
         std::cout << "THE EMOJI-ANALYZER" << std::endl;
-        std::cout << "An Instagram post analyzer" << std::endl;
+        std::cout << "An Instagram post analyzer — for emojis!" << std::endl;
         std::cout << "To get started, enter \"man\" in command line to get a list of commands" << std::endl;
     }
 
@@ -163,7 +167,6 @@ int main(int argc, char* argv[]) {
                         lines = std::stoi((std::string)value);
                         if (lines < 1) {
                             throw std::invalid_argument("Error: Invalid option value for " + option.substr(0,7) + '\n');
-                            exit(1);
                         }
                     }
                     catch (std::invalid_argument& e){
@@ -179,13 +182,6 @@ int main(int argc, char* argv[]) {
             }
             // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji)
             // print(sortedCap);
-
-            // TODO: Remove dummy code
-            std::cout << "sortMeth: " << sortMeth << std::endl;
-            std::cout << "user: " << user << std::endl;
-            std::cout << "metric: " << metric << std::endl;
-            std::cout << "emoji: " << emoji << std::endl;
-            std::cout << "lines: " << lines << std::endl;
             exit(0);
         }
         else {
@@ -195,7 +191,7 @@ int main(int argc, char* argv[]) {
     }
 
     else if (command == "man") {
-        // std::cout << man;
+        std::cout << parser.GetManual();
     }
 
     else {
@@ -203,3 +199,4 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 }
+
