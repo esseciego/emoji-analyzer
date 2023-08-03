@@ -26,15 +26,13 @@ CaptionList::CaptionList(std::string filename) {
 
 	std::vector<std::string> row;
 	std::string line, cell, temp;
-
+	
+	// Get rid of the column titles
 	std::getline(file, line);
-	std::cout << "The columns are: " << line << std::endl;
 
-	while (file >> temp) {
+	while (std::getline(file, line)) {
 		
 		row.clear();
-		std::getline(file, line);
-		std::cout << line << std::endl;			// FOR TESTING ONLY
 		std::stringstream ss(line);
 
 		while (std::getline(ss, cell, ',')) {
@@ -48,17 +46,8 @@ CaptionList::CaptionList(std::string filename) {
 		}
 
 		// Create new caption
-		std::cout << "New Caption" << std::endl;
-		std::cout << "userIndx: " << row.at(userIndx) << std::endl;	// FOR TESTING ONLY
-		std::cout << "postIndx: " << row.at(postIndx) << std::endl;	// FOR TESTING ONLY
 		Caption newCaption(emojis, row.at(userIndx), row.at(postIndx));
-		std::cout << "Caption made" << std::endl;
 		captions.push_back(newCaption);
-
-		std::cout << "Caption user: " << newCaption.getUsername() << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
 	}
 	
 	file.close();
@@ -69,7 +58,7 @@ void CaptionList::mergeSort() {
 	
 	Timer timer;
 	timer.start();
-	mergeSortAlgorithm(captions, 0, 0);
+	mergeSortAlgorithm(captions, 0, captions.size()/2);
 	time = timer.stop();
 }
 
@@ -78,7 +67,7 @@ void CaptionList::quickSort() {
 	
 	Timer timer;
 	timer.start();
-	quickSortAlgorithm(captions, 0, 0);
+	quickSortAlgorithm(captions, 0, captions.size()/2);
 	time = timer.stop();
 }
 
