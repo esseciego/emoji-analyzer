@@ -52,7 +52,6 @@
 *  **DEFAULTS**
     * **dpoints** : Displays total data points in local dataset 
 *  **OPTIONS**
-    * **-user=@{_user_}**: Displays value for a specified user. If user doesn't exist, prints error.
     * **-all** : Displays number of data points for all users in local database
 
 ## 2. Analyzing Data

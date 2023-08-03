@@ -25,7 +25,6 @@
         // Ex. C:\Users\spcie\CLionProjects\project-3-emoji\emoji-analyzer
     // 5. Click "Apply" and press "Okay" to save configuration
 
-
 int main(int argc, char* argv[]) {
     ArgParser parser;
     parser.ReadManual("input/cmd-manual.txt");
@@ -34,7 +33,7 @@ int main(int argc, char* argv[]) {
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
         std::cout << "THE EMOJI-ANALYZER" << std::endl;
         std::cout << "An Instagram post analyzer — for emojis!" << std::endl;
-        std::cout << "To get started, enter \"man\" in command line to get a list of commands" << std::endl;
+        std::cout << "To get started, enter \"man\" in the command line to get a list of commands" << std::endl;
     }
 
     // Dummy code, remove later
@@ -91,25 +90,19 @@ int main(int argc, char* argv[]) {
             // std::cout << users.GetNumDataPoints << std::endl;
             exit(0);
         }
-        else if (option.substr(0,7) == "-user=@") {
-            std::string name = option.substr(7);
-            // if (!users.Find(users)) {
-            //     std::cout << "Error: Could not find " << name << "in local database" << std::endl;
-            //     std::cout << "Hint: Enter "list" in command line to get a list of all the users in local database;
-            //     exit(0);
-            // }
-            // User& user = users.GetUser(name);
-            // std::cout << user.GetNumDataPoints << std::endl;
-            exit(0);
-        }
+
         else {
             std::cout << "Error: " << option << " is not a recognized option";
             exit(1);
         }
     }
 
-
     else if (command == "sort") {
+        if (argc == 2) {
+            std::cout << "Error: " << command << " needs an additional argument." << std::endl;
+            exit(1);
+        }
+
         // Positional argument: Needs to be entered after "sort" command
         std::string sortMeth;
 
@@ -119,11 +112,6 @@ int main(int argc, char* argv[]) {
         std::string metric = "usage";
         std::string emoji = "none";
         int lines = 10;
-
-        if (argc == 2) {
-            std::cout << "Error: " << command << " needs an additional argument." << std::endl;
-            exit(1);
-        }
 
         i++;
         sortMeth = argv[i];
