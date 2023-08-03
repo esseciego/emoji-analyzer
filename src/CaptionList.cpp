@@ -1,6 +1,7 @@
 #include "CaptionList.h"
 #include "Caption.h"
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <vector>
 #include <string>
@@ -14,10 +15,11 @@
 // Parametrized CaptionList constructor
 CaptionList::CaptionList(std::string filename) {
 	
-	std::ifstream file(filename);
+	std::fstream file(filename, std::fstream::in);
+	std::cout << "Filename: " << filename << std::endl;
 
 	if (!file.is_open()) {
-		std::cout << "Captions file could not be opened" << std::endl;
+		std::cout << "Captions file could not be opened." << std::endl;
 	}
 	
 	int postIndx = 0, userIndx= 1, emojisIndx = 5;
@@ -25,24 +27,38 @@ CaptionList::CaptionList(std::string filename) {
 	std::vector<std::string> row;
 	std::string line, cell, temp;
 
+	std::getline(file, line);
+	std::cout << "The columns are: " << line << std::endl;
+
 	while (file >> temp) {
 		
 		row.clear();
 		std::getline(file, line);
+		std::cout << line << std::endl;			// FOR TESTING ONLY
 		std::stringstream ss(line);
 
 		while (std::getline(ss, cell, ',')) {
 			row.push_back(cell);
 		}
 		
+		// Get emoji data
 		std::vector<std::string> emojis;
-
 		for (int i = emojisIndx; i < row.size(); i++) {
 			emojis.push_back(row.at(i));
 		}
 
+		// Create new caption
+		std::cout << "New Caption" << std::endl;
+		std::cout << "userIndx: " << row.at(userIndx) << std::endl;	// FOR TESTING ONLY
+		std::cout << "postIndx: " << row.at(postIndx) << std::endl;	// FOR TESTING ONLY
 		Caption newCaption(emojis, row.at(userIndx), row.at(postIndx));
+		std::cout << "Caption made" << std::endl;
 		captions.push_back(newCaption);
+
+		std::cout << "Caption user: " << newCaption.getUsername() << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
 	}
 	
 	file.close();
@@ -142,7 +158,7 @@ void merge(std::vector<Caption> captions, int left, int mid, int right) {
 	}
 }
 
-void quickSort(std::vector<Caption> captions, int low, int high) {
+void quickSortAlgorithm(std::vector<Caption> captions, int low, int high) {
 	
 	if (low < high) {
 		int pivot = partition(captions, low, high);
@@ -182,15 +198,15 @@ int partition(std::vector<Caption> captions, int low, int high) {
 }
 
 
-void swap(Caption& a, Caption& b) {
+void swap(Caption* a, Caption* b) {
 	
-	Caption temp(a.getEmojis(), a.getUsername(), a.getPost());
+	Caption temp(a->getEmojis(), a->getUsername(), a->getPost());
 
-	a.setEmojis(b.getEmojis());
-	a.setUsername(b.getUsername());
-	a.setPost(b.getPost());
+	a->setEmojis(b->getEmojis());
+	a->setUsername(b->getUsername());
+	a->setPost(b->getPost());
 	
-	b.setEmojis(temp.getEmojis());
-	b.setUsername(temp.getUsername());
-	b.setPost(temp.getPost());
+	b->setEmojis(temp.getEmojis());
+	b->setUsername(temp.getUsername());
+	b->setPost(temp.getPost());
 }
