@@ -11,11 +11,12 @@ wb = openpyxl.load_workbook(fname)
 sheet = wb.get_sheet_by_name('50aTime')
 
 #https://www.regextester.com/106421
-for rowOfCellObjects in sheet['A2':'A18956']:
+#O(N*S) where N is the number of captions and S is the length of the caption
+for rowOfCellObjects in sheet['A2':'A23761']:
   for cellObj in rowOfCellObjects:
     #Iterate through each cell in the range
     line = cellObj.value
-    #regex to grab only emojis from captions
+    #regex to grab only emojis from captions O(S) where S is the length of the string
     regex = re.compile(r'(\u00a9|\u00ae|[\u2050-\u2099]|[\u2601-\u2605]|[\u2610-\u2660]|[\u2662-\u3000]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])')
     onlyEmojis = regex.findall(line)
     #Convert emojis to text
