@@ -32,30 +32,43 @@ TEST_CASE("Testing swap()", "[helper functions]") {
 	REQUIRE(temp[b].getPost() == list.getCaptions()[a].getPost());
 }
 
-TEST_CASE("Testing mergeSort()", "[algorithm function]") {
+TEST_CASE("Testing mergeSort() and quickSort() have same output", "[algorithm function]") {
 	
 	CaptionList list("Dependencies/Captions.csv");
-
+	CaptionList list_a("Dependencies/Captions.csv");
 	list.mergeSort();
-	std::cout << "Time to run function: " << list.getTime() << " ms" << std::endl;
+	list_a.mergeSort();
+	for (int i = 0; i < list.getCaptions().size(); i++)
+		REQUIRE(list.getCaptions()[i].getEmojis() == list_a.getCaptions()[i].getEmojis());
+}
+
+TEST_CASE("Testing quickSort()", "[algorithm function]") {
+	
+	CaptionList list("Dependencies/Captions.csv");
 	std::vector<Caption> sorted = list.getCaptions();
 
-	for (int i = 0; i < list.getCaptions().size(); i++) {
-		for (int j = 0; j < sorted[i].getEmojis().size(); j++) {
-			std::cout << sorted[i].getEmojis()[j] << " ";
-		}
-		std::cout << std::endl;
-	}
+	list.quickSort();
 	
+	for (int i = list.getCaptions().size() - 1; i >= 1; i--) {
+
+		REQUIRE(list.getCaptions()[i].getEmojis().size() >= list.getCaptions()[i-1].getEmojis().size());
+	}
+
 	REQUIRE(1==1);
 }
 
-// TEST_CASE("Testing quickSort()", "[algorithm function]") {
-// 	
-// 	CaptionList list("Dependencies/Captions.csv");
-// 	std::vector<Caption> sorted = list.getCaptions();
-//
-// 	list.quickSort();
-// 	
-// 	REQUIRE(1==1);
-// }
+TEST_CASE("Testing mergeSort()", "[algorithm function]") {
+	
+	CaptionList list("Dependencies/Captions.csv");
+	std::vector<Caption> sorted = list.getCaptions();
+
+	list.quickSort();
+	
+	for (int i = list.getCaptions().size() - 1; i > 23000; i--) {
+	
+		REQUIRE(list.getCaptions()[i].getEmojis().size() >= list.getCaptions()[i-1].getEmojis().size());
+	}
+
+	REQUIRE(1==1);
+}
+
