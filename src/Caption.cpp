@@ -25,6 +25,7 @@ std::string Caption::getPost() {
 }
 
 void Caption::setEmojis(std::vector<std::string> emojis) {
+	this->emojis.clear();
 	this->emojis = emojis;
 }
 
@@ -35,4 +36,3 @@ void Caption::setUsername(std::string username) {
 void Caption::setPost(std::string post) {
 	this->post = post;
 }
-

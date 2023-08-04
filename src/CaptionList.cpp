@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include "Timer.h"
-
+#include <utility>
 
 
 /**************************************************************************************************/
@@ -16,7 +16,6 @@
 CaptionList::CaptionList(std::string filename) {
 	
 	std::fstream file(filename, std::fstream::in);
-	std::cout << "Filename: " << filename << std::endl;
 
 	if (!file.is_open()) {
 		std::cout << "Captions file could not be opened." << std::endl;
@@ -67,7 +66,8 @@ void CaptionList::quickSort() {
 	
 	Timer timer;
 	timer.start();
-	quickSortAlgorithm(captions, 0, captions.size()/2);
+	int n = captions.size() / captions[0].getEmojis().size();
+	quickSortAlgorithm(captions, 0, n - 1); //captions.size()/2);
 	time = timer.stop();
 }
 
@@ -87,7 +87,7 @@ float CaptionList::getTime() {
 /**************************************************************************************************/
 /************************ CaptionList Helper Functions *****************************/
 void mergeSortAlgorithm(std::vector<Caption> captions, int left, int right) {
-	
+
 	if (left < right) {
 		
 		int mid = left + (right - left) / 2;
@@ -107,7 +107,7 @@ void merge(std::vector<Caption> captions, int left, int mid, int right) {
 	std::vector<Caption> X, Y;
 
 	for (int i = 0; i < n1; i++) {
-		X.push_back(captions[left+1]);
+		X.push_back(captions[left + i]);
 	}
 	for (int j = 0; j < n2; j++) {
 		Y.push_back(captions[mid + 1 + j]);
@@ -122,7 +122,7 @@ void merge(std::vector<Caption> captions, int left, int mid, int right) {
 
 		if (X[i].getNumEmojis() <= Y[j].getNumEmojis()) {
 
-			captions[k] = X[k];
+			captions[k] = X[i];
 			i++;
 		}
 		else {
@@ -178,24 +178,23 @@ int partition(std::vector<Caption> captions, int low, int high) {
 			down--;
 		}
 		if (up < down) {
-			swap(&captions[up], &captions[down]);
+			swap(captions, up, down);
 		}
 
 	}
-	swap(&captions[up], &captions[down]);
+	swap(captions, low, down);
 	return down;
 }
 
 
-void swap(Caption* a, Caption* b) {
-	
-	Caption temp(a->getEmojis(), a->getUsername(), a->getPost());
+void swap(std::vector<Caption> &captions, int a, int b) {
 
-	a->setEmojis(b->getEmojis());
-	a->setUsername(b->getUsername());
-	a->setPost(b->getPost());
-	
-	b->setEmojis(temp.getEmojis());
-	b->setUsername(temp.getUsername());
-	b->setPost(temp.getPost());
+	Caption temp(captions[a].getEmojis(), captions[a].getUsername(), captions[a].getPost());
+
+	captions[a].setEmojis(captions[b].getEmojis());
+	captions[a].setUsername(captions[b].getUsername());
+	captions[a].setPost(captions[b].getPost());
+	captions[b].setEmojis(temp.getEmojis());
+	captions[b].setUsername(temp.getUsername());
+	captions[b].setPost(temp.getPost());
 }
