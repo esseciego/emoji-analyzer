@@ -1,3 +1,16 @@
+// Project:		emoji-analyzer
+// File:		src/test.cpp
+// Team:		Esse Ciego
+//			Justin Galin
+//			Daniel Pernar
+// Description:		TEST FILE
+//			Used to quickly test implementations of functions
+//			as necessary. The code should be uncommented, 
+//			modified, and ran as necessary.
+// Last Updated On:	5 August 2023
+
+
+
 // #include "../src/Caption.h"
 // #include "../src/Timer.h"
 // #include "../src/CaptionList.h"

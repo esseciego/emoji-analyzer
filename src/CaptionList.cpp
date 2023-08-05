@@ -1,3 +1,13 @@
+// Project:		emoji-analyzer
+// File:		src/CaptionList.cpp
+// Team:		Esse Ciego
+//			Justin Galin
+//			Daniel Pernar
+// Description:		Provides definitions for the CaptionList member functions 
+//			and non-member, helper functions. Prototypes can be 
+//			found in CaptionList.h.
+// Last Updated On:	5 August 2023
+
 #include "CaptionList.h"
 #include "Caption.h"
 #include <fstream>
@@ -15,9 +25,12 @@
 // Parametrized CaptionList constructor
 CaptionList::CaptionList(std::string filename) {
 	
+	// Open CSV file based on given filename
 	std::fstream file(filename, std::fstream::in);
 
+	// Check that the file was successfully opened
 	if (!file.is_open()) {
+
 		std::cout << "Captions file could not be opened." << std::endl;
 	}
 	
@@ -33,24 +46,32 @@ CaptionList::CaptionList(std::string filename) {
 		
 		row.clear();
 		std::stringstream ss(line);
-
+		
+		// Load cells into a temporary vector
 		while (std::getline(ss, cell, ',')) {
+
 			row.push_back(cell);
 		}
 		
 		// Get emoji data
 		std::vector<std::string> emojis;
 		for (int i = emojisIndx; i < row.size(); i++) {
+
+			// Remove blank cells
 			if (row.at(i) != "") {
+
 				emojis.push_back(row.at(i));
 			}
 		}
 
 		// Create new caption
 		Caption newCaption(emojis, row.at(userIndx), row.at(postIndx));
+
+		// Add newCaption to captions vector
 		captions.push_back(newCaption);
 	}
 	
+	// Close CSV file
 	file.close();
 }
 
@@ -88,6 +109,8 @@ float CaptionList::getTime() {
 
 /**************************************************************************************************/
 /************************ CaptionList Helper Functions *****************************/
+// Merge Sort functionality used to sort captions vector
+// Based on code provided in Data Structures Lecture 6 - Sorting
 void mergeSortAlgorithm(std::vector<Caption>& captions, int left, int right) {
 
 	if (left < right) {
@@ -102,6 +125,8 @@ void mergeSortAlgorithm(std::vector<Caption>& captions, int left, int right) {
 
 }
 
+// Used to merge two Caption vectors in the mergeSortAlgorithm function
+// Based on code provided in Data Structures Lecture 6 - Sorting
 void merge(std::vector<Caption>& captions, int left, int mid, int right) {
 
 	int n1 = mid - left + 1;
@@ -149,6 +174,8 @@ void merge(std::vector<Caption>& captions, int left, int mid, int right) {
 	}
 }
 
+// Quick Sort functionality used to sort captions vector
+// Based on code provided in Data Structures Lecture 6 - Sorting
 void quickSortAlgorithm(std::vector<Caption>& captions, int low, int high) {
 	
 	if (low < high) {
@@ -158,6 +185,8 @@ void quickSortAlgorithm(std::vector<Caption>& captions, int low, int high) {
 	}
 }
 
+// Used to create the partition point in the quickSortAlgorithm funciton
+// Based on code provided in Data Structures Lecture 6 - Sorting
 int partition(std::vector<Caption>& captions, int low, int high) {
 
 	Caption pivot = captions[low];
@@ -188,7 +217,8 @@ int partition(std::vector<Caption>& captions, int low, int high) {
 	return down;
 }
 
-
+// Swaps the position of Caption objects a and b in a provided Caption
+// vector, used in quickSortAlgorithm function
 void swap(std::vector<Caption>& captions, int a, int b) {
 
 	Caption temp(captions[a].getEmojis(), captions[a].getUsername(), captions[a].getPost());

@@ -1,3 +1,14 @@
+// Project:		emoji-analyzer
+// File:		src/Caption.h
+// Team:		Esse Ciego
+//			Justin Galin
+//			Daniel Pernar
+// Description:		Provides the Caption class prototype that stores 
+//			certain data from an Instagram caption. This data
+//			is loaded from a CSV file, and the class is 
+//			designed to be used with a CaptionList object.
+// Last Updated On:	5 August 2023
+
 #pragma once
 #include <iostream>
 #include <vector>

@@ -1,3 +1,13 @@
+// Project:		emoji-analyzer
+// File:		test-unit/test.cpp
+// Team:		Esse Ciego
+//			Justin Galin
+//			Daniel Pernar
+// Description:		Using the Catch2 testing framework, this file
+//			is used to test the functionality of the project
+//			using predefined test cases.
+// Last Updated On:	5 August 2023
+
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_FAST_COMPILE
 
