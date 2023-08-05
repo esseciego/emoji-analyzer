@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "ArgParser.h"
+#include "Users.h"
 
 // FILE STRUCTURE:
     // ../emoji-analyzer/
@@ -27,7 +28,11 @@
 
 int main(int argc, char* argv[]) {
     ArgParser parser;
+    Users users;
     parser.ReadManual("input/cmd-manual.txt");
+    users.ReadUsers("input/users.txt");
+
+
 
     // Check help
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
@@ -74,7 +79,7 @@ int main(int argc, char* argv[]) {
     }
 
     else if (command == "list") {
-        // list()
+        users.PrintUsers();
         exit(0);
     }
 

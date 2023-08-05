@@ -9,6 +9,7 @@ ArgParser::ArgParser() {
 }
 
 void ArgParser::ReadManual(std::string fn) {
+    // Reads manual.txt
     std::ifstream inFS(fn);
 
     if (inFS) {   // If file is open
