@@ -99,6 +99,10 @@ std::vector<Caption> CaptionList::getCaptions() {
 	return captions;
 }
 
+int CaptionList::getSize() {
+    return captions.size();
+}
+
 // Return the time it took for the last used sorting algorithm
 // to run.
 float CaptionList::getTime() {

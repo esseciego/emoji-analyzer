@@ -40,6 +40,9 @@ class CaptionList {
 	// Return the captions vector
 	std::vector<Caption> getCaptions();
 
+    // Return captions size
+    int getSize();
+
 	// Return the time it took for the last used sorting algorithm
 	// to run.
 	float getTime();
