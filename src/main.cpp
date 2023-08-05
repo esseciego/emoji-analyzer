@@ -2,6 +2,7 @@
 
 #include "ArgParser.h"
 #include "Users.h"
+#include "CaptionList.h"
 
 // FILE STRUCTURE:
     // ../emoji-analyzer/
@@ -29,9 +30,9 @@
 int main(int argc, char* argv[]) {
     ArgParser parser;
     Users users;
+    CaptionList captions("input/Data.csv");
     parser.ReadManual("input/cmd-manual.txt");
     users.ReadUsers("input/users.txt");
-
 
     // Check help
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
@@ -79,14 +80,14 @@ int main(int argc, char* argv[]) {
 
     else if (command == "dpoints") {
         if (argc == 2) {
-            // std::cout << users.GetNumDataPoints << std::endl;
+            std::cout << captions.getSize() * 3 << std::endl;
             exit(0);
         }
 
         i++;
         std::string option = argv[i];
         if (option == "-all") {
-            // std::cout << users.GetNumDataPoints << std::endl;
+            std::cout << captions.getSize() * 3 << std::endl;
             exit(0);
         }
 
@@ -110,27 +111,27 @@ int main(int argc, char* argv[]) {
         std::string user = "all";
         std::string metric = "usage";
         std::string emoji = "none";
-        int lines = 10;
+        int lines = 20;
 
         i++;
         sortMeth = argv[i];
-        if (sortMeth == "-quick" || sortMeth == "-merge") {
-            if (argc == 3) {   // ex. "./emo-yzer.exe sort -merge"
-                // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji);
-                // print(sortedCap);
+        if (sortMeth == "-quick") {
+            captions.quickSort();
+            std::vector<Caption> sortedCaptions = captions.getCaptions();
+            for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
+                std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
             }
-
-            if (sortMeth == "-quick") {
-                sortMeth = "quick";
-            }
-            else if (sortMeth == "-merge") {
-                sortMeth = "merge";
-            }
-
-            // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji)
-            // print(sortedCap);
             exit(0);
         }
+        else if (sortMeth == "-merge") {
+            captions.mergeSort();
+            std::vector<Caption> sortedCaptions = captions.getCaptions();
+            for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
+                std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
+            }
+            exit(0);
+        }
+
         else {
             std::cout << "Error: " << sortMeth << " is not a recognized sorting method";
             exit(1);
