@@ -43,8 +43,6 @@
        25,000
     >> dpoints -all
        25,000
-    >> dpoints -user=@beyonce
-       8,542
 > DEFAULTS
     >> dpoints : Displays total data points in local dataset
 > OPTIONS

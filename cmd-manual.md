@@ -47,8 +47,6 @@
       <br> 25,000
     * **dpoints -all**
       <br> 25,000
-    * **dpoints -user=@beyonce**
-     <br> 8,542
 *  **DEFAULTS**
     * **dpoints** : Displays total data points in local dataset 
 *  **OPTIONS**
@@ -60,17 +58,13 @@
 *  **NAME**
     * sort : Displays sorted lists of posts and the time complexity used to sort posts
 *  **SYNOPSIS**
-    * sort {**sorting method**} {_username_} {_metric_} {_emoji_} {_lines-to-display_} 
+    * sort {**sorting method**}  
 *  **EXAMPLES**
-    * **sort -merge -all**
+    * **sort -merge**
     <br> Displays top 20 posts with the most number of emojis used in a caption, analyzing all users in local database and sorting captions
     using mergesort. The first column displayed is the caption and the second column is the number of emojis in the caption. 
-    * **sort -merge -user=@beyonce**
-    <br> Displays @beyonce's top 20 posts with the most emojis used in caption and the number of emojis used in the caption
-    * **sort -merge -user=@beyonce -emoji=red-heart**
-    <br> Displays @beyonce's top 20 posts with the most red-heart emojis used in caption and the number of times the heart-emoji was used in the caption
-    * **sort -merge -user=@beyonce -emoji=red-heart 50**
-    <br> Displays @beyonce's top 20 posts with the most red-heart emojis used in caption and the number of times the heart-emoji was used in the caption
+    * **sort -quick **
+    <br> (Same displays as "-merge" but performs quicksort instead)
 *  **DEFAULTS**
     * user_name = all
     * metric = usage
@@ -79,12 +73,7 @@
 *  **OPTIONS**
     * **-merge** : Performs mergesort on captions
     * **-quick** : Performs quicksort on captions
-    * **-all** : Analyzes posts from all users in local database
-    * **-user=@{_user_}** : Analyzes posts from specified user. If user doesn't exist in database, prints error message and recommends list command
-    * **-usage** : Sorts captions the number of emojis used in post
-    * **-emoji={_emoji_}** : Specifies emoji to sort by. If emoji doesn't exist, prints error message.
-    * **-lines={_int_}** : Specifies number of lines. If option value is not a positive integer, prints error message. 
----
+
 
 ## 3. Getting Help
 
@@ -104,7 +93,7 @@
 *  **NAME**
     * --help : Displays program's description and purpose
 *  **SYNOPSIS**
-    *  **(no arguments), -h,--help**,
+    *  **(no arguments), --help**
 *  **EXAMPLES**
     * N/A
 *  **DEFAULTS**
