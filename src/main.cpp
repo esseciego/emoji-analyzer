@@ -111,22 +111,26 @@ int main(int argc, char* argv[]) {
         std::string user = "all";
         std::string metric = "usage";
         std::string emoji = "none";
-        int lines = 10;
+        int lines = 20;
 
         i++;
         sortMeth = argv[i];
         if (sortMeth == "-quick") {
             captions.quickSort();
             std::vector<Caption> sortedCaptions = captions.getCaptions();
-            // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji)
-            // print(sortedCap);
+            for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
+                std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
+            }
             exit(0);
         }
         else if (sortMeth == "-merge") {
-
+            captions.mergeSort();
+            std::vector<Caption> sortedCaptions = captions.getCaptions();
+            for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
+                std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
+            }
             exit(0);
         }
-
 
         else {
             std::cout << "Error: " << sortMeth << " is not a recognized sorting method";

@@ -89,7 +89,10 @@ void CaptionList::quickSort() {
 	
 	Timer timer;
 	timer.start();
-	int n = captions.size() / captions[0].getEmojis().size();
+    int n = captions.size();
+    if (captions[0].getEmojis().size() > 0) {
+        n = captions.size() / captions[0].getEmojis().size();
+    }
 	quickSortAlgorithm(captions, 0, n - 1); //captions.size()/2);
 	time = timer.stop();
 }
