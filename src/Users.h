@@ -17,7 +17,7 @@ class Users {
     public:
         Users();
         void ReadUsers(const std::string& fn);
-        void SearchUsers(const std::string& user);
+        bool UserExists(const std::string& user);
         void PrintUsers();
 };
 

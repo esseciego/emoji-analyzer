@@ -25,8 +25,14 @@ void Users::ReadUsers(const std::string& fn) {
         exit(1);
     }
 }
-void Users::SearchUsers(const std::string& user) {
+bool Users::UserExists(const std::string& user) {
     // Checks if user is in local database
+    if (users.find(user) != users.end()) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 void Users::PrintUsers() {
     // Prints list of users sorted alphabetically

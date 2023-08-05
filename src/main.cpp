@@ -33,7 +33,6 @@ int main(int argc, char* argv[]) {
     users.ReadUsers("input/users.txt");
 
 
-
     // Check help
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
         std::cout << "THE EMOJI-ANALYZER" << std::endl;
@@ -41,18 +40,12 @@ int main(int argc, char* argv[]) {
         std::cout << "To get started, enter \"man\" in the command line to get a list of commands" << std::endl;
     }
 
-    // Dummy code, remove later
-    std::cout << std::endl;
-    for (int k = 0; k < argc; k++) {
-        std::cout << "argv[" << k << "]: " << (std::string) argv[k] << std::endl;
-    }
-
     // 1st arg = Command
     int i = 1;
     std::string command = (std::string)(argv[i]);
 
     // Following arg = Options & positional arguments
-    // CLI ignores arguments after the appropriate
+    // CLI ignores arguments after the arguments are registered
 
     if (command == "search") {
         if (argc == 2) {
@@ -64,12 +57,13 @@ int main(int argc, char* argv[]) {
         std::string option = argv[i];   // IG username
         if (option.substr(0,7) == "-user=@") {
             std::string name = option.substr(7);
-            // search(name);
-            // if (search(name)) {
-                // std::cout << "Found "@" << name << " in local database." << std::endl;
-            // else {
-                // std::cout << "Could not find @" << name << " in local database." << std::endl;
-                // std::cout << "Hint: Enter "list" in command line to get a list of all the users in local database;
+            if (users.UserExists(name)) {
+                std::cout << "Found @" << name << " in local database." << std::endl;
+            }
+            else {
+                std::cout << "Could not find @" << name << " in local database." << std::endl;
+                std::cout << "Hint: Enter \"list\" in command line to get list of all users in local database" << std::endl;
+            }
             exit(0);
         }
         else {
