@@ -115,22 +115,16 @@ int main(int argc, char* argv[]) {
         i++;
         sortMeth = argv[i];
         if (sortMeth == "-quick" || sortMeth == "-merge") {
+            if (argc == 3) {   // ex. "./emo-yzer.exe sort -merge"
+                // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji);
+                // print(sortedCap);
+            }
+
             if (sortMeth == "-quick") {
                 sortMeth = "quick";
             }
             else if (sortMeth == "-merge") {
                 sortMeth = "merge";
-            }
-
-            if (argc == 3) {   // ex. "./emo-yzer.exe sort -merge"
-                // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji);
-                // print(sortedCap);
-                std::cout << "sortMeth: " << sortMeth << std::endl;
-                std::cout << "user: " << user << std::endl;
-                std::cout << "metric: " << metric << std::endl;
-                std::cout << "emoji: " << emoji << std::endl;
-                std::cout << "lines: " << lines << std::endl;
-                exit(0);
             }
 
             // vector<Caption> sortedCap = sort(sortMeth, user, metric, emoji)
