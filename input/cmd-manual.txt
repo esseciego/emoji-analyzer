@@ -63,14 +63,14 @@
        is the number of emojis in the caption. At the end of the list, displays milliseconds elapsed to perform quicksort)
     >> sort -quick
        (Same displays as "-merge" but performs quicksort instead)
+    >> sort -quick -lines=50
+       Displays top 50 posts with the most used emojis in a caption
 > DEFAULTS
-    >> user_name = all
-    >> metric = usage
-    >> emoji = none
     >> lines-to-display = 20
 > OPTIONS
     >> -merge : Performs mergesort on captions
     >> -quick : Performs quicksort on captions
+    >> sort {sorting method} -lines={n} : Displays n lines
 
 // -----------------------------------------------------------------------------
 // 3. Getting help

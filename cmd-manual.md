@@ -63,16 +63,16 @@
     * **sort -merge**
     <br> Displays top 20 posts with the most number of emojis used in a caption, analyzing all users in local database and sorting captions
     using mergesort. The first column displayed is the caption and the second column is the number of emojis in the caption. 
-    * **sort -quick **
+    * **sort -quick**
     <br> (Same displays as "-merge" but performs quicksort instead)
+    * **sort -quick -lines=50**
+    <br> Displays top 50 posts with the most used emojis in a caption
 *  **DEFAULTS**
-    * user_name = all
-    * metric = usage
-    * emoji = none
     * lines-to-display = 20
 *  **OPTIONS**
     * **-merge** : Performs mergesort on captions
     * **-quick** : Performs quicksort on captions
+    * **-sort {sorting method} -lines={n}** : Displays n lines
 
 
 ## 3. Getting Help

@@ -106,21 +106,40 @@ int main(int argc, char* argv[]) {
         // Positional argument: Needs to be entered after "sort" command
         std::string sortMeth;
 
-        // Default option values
-            // Order of options can vary + Whether they're included in argv is optional
-        std::string user = "all";
-        std::string metric = "usage";
-        std::string emoji = "none";
+        // Default option value for number of lines printed
         int lines = 20;
 
         i++;
         sortMeth = argv[i];
+
+        if (argc == 4) {
+            i++;
+            std::string option = argv[i];
+            if (option.substr(0,7) == "-lines=") {
+                try {
+                    lines = std::stoi(option.substr(7));
+                }
+                catch (std::exception& e) {
+                    std::cout << "Error: invalid argument." << std::endl;
+                    exit(1);
+                }
+            }
+            else {
+                std::cout << "Error: " << option << " is not a recognized option" << std::endl;
+                exit(1);
+            }
+        }
+
         if (sortMeth == "-quick") {
             captions.quickSort();
             std::vector<Caption> sortedCaptions = captions.getCaptions();
             for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
-                std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
+                std::cout << "@" << sortedCaptions[i].getUsername() << std::endl;
+                std::cout << sortedCaptions[i].getPost() << std::endl;
+                std::cout << "Emojis used: " << sortedCaptions[i].getNumEmojis() << std::endl << std::endl;
             }
+            std::cout << std::endl;
+            std::cout << "Time elapsed: " << captions.getTime() << "ms" << std::endl;
             exit(0);
         }
         else if (sortMeth == "-merge") {
@@ -129,6 +148,7 @@ int main(int argc, char* argv[]) {
             for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
                 std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
             }
+            std::cout << "Time elapsed: " << captions.getTime() << "ms" << std::endl;
             exit(0);
         }
 

@@ -65,10 +65,12 @@ CaptionList::CaptionList(std::string filename) {
 		}
 
 		// Create new caption
-		Caption newCaption(emojis, row.at(userIndx), row.at(postIndx));
+        if (emojis.size() != 24) {   // Bug in EmojiExtracter.py/CommaExtractor.py that make some posts have 24 heart-suit emojis
+            Caption newCaption(emojis, row.at(userIndx), row.at(postIndx));
 
-		// Add newCaption to captions vector
-		captions.push_back(newCaption);
+            // Add newCaption to captions vector
+            captions.push_back(newCaption);
+        }
 	}
 	
 	// Close CSV file
