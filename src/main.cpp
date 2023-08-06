@@ -79,25 +79,6 @@ int main(int argc, char* argv[]) {
         exit(0);
     }
 
-    else if (command == "dpoints") {
-        if (argc == 2) {
-            std::cout << captions.getSize() * 3 << std::endl;
-            exit(0);
-        }
-
-        i++;
-        std::string option = argv[i];
-        if (option == "-all") {
-            std::cout << captions.getSize() * 3 << std::endl;
-            exit(0);
-        }
-
-        else {
-            std::cout << "Error: " << option << " is not a recognized option";
-            exit(1);
-        }
-    }
-
     else if (command == "sort") {
         if (argc == 2) {
             std::cout << "Error: " << command << " needs an additional argument." << std::endl;
