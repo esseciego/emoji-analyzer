@@ -119,8 +119,12 @@ int main(int argc, char* argv[]) {
             captions.quickSort();
             std::vector<Caption> sortedCaptions = captions.getCaptions();
             for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
-                std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
+                std::cout << "@" << sortedCaptions[i].getUsername() << std::endl;
+                std::cout << sortedCaptions[i].getPost() << std::endl;
+                std::cout << "Emojis used: " << sortedCaptions[i].getNumEmojis() << std::endl << std::endl;
             }
+            std::cout << std::endl;
+            std::cout << "Time elapsed: " << captions.getTime() << "ms" << std::endl;
             exit(0);
         }
         else if (sortMeth == "-merge") {
@@ -129,6 +133,7 @@ int main(int argc, char* argv[]) {
             for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
                 std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
             }
+            std::cout << "Time elapsed: " << captions.getTime() << "ms" << std::endl;
             exit(0);
         }
 
