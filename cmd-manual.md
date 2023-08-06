@@ -37,20 +37,6 @@
     * list : Lists all users in local database
 *  **OPTIONS**
     * N/A
----
-*  **NAME**
-    * dpoints : Displays number of data points in local dataset
-*  **SYNOPSIS**
-    * **dpoints** {_username_}
-*  **EXAMPLES**
-    * **dpoints**
-      <br> 25,000
-    * **dpoints -all**
-      <br> 25,000
-*  **DEFAULTS**
-    * **dpoints** : Displays total data points in local dataset 
-*  **OPTIONS**
-    * **-all** : Displays number of data points for all users in local database
 
 ## 2. Analyzing Data
 
@@ -62,7 +48,7 @@
 *  **EXAMPLES**
     * **sort -merge**
     <br> Displays top 20 posts with the most number of emojis used in a caption, analyzing all users in local database and sorting captions
-    using mergesort. The first column displayed is the caption and the second column is the number of emojis in the caption. 
+    using mergesort. The username, the caption, and the number of emojis in the caption is displayed.
     * **sort -quick**
     <br> (Same displays as "-merge" but performs quicksort instead)
     * **sort -quick -lines=50**
