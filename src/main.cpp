@@ -37,8 +37,9 @@ int main(int argc, char* argv[]) {
     // Check help
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
         std::cout << "THE EMOJI-ANALYZER" << std::endl;
-        std::cout << "An Instagram post analyzer — for emojis!" << std::endl;
+        std::cout << "An Instagram post analyzer, for emojis!" << std::endl;
         std::cout << "To get started, enter \"man\" in the command line to get a list of commands" << std::endl;
+        exit(0);
     }
 
     // 1st arg = Command
