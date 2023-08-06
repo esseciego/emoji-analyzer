@@ -106,15 +106,30 @@ int main(int argc, char* argv[]) {
         // Positional argument: Needs to be entered after "sort" command
         std::string sortMeth;
 
-        // Default option values
-            // Order of options can vary + Whether they're included in argv is optional
-        std::string user = "all";
-        std::string metric = "usage";
-        std::string emoji = "none";
+        // Default option value for number of lines printed
         int lines = 20;
 
         i++;
         sortMeth = argv[i];
+
+        if (argc == 4) {
+            i++;
+            std::string option = argv[i];
+            if (option.substr(0,7) == "-lines=") {
+                try {
+                    lines = std::stoi(option.substr(7));
+                }
+                catch (std::exception& e) {
+                    std::cout << "Error: invalid argument." << std::endl;
+                    exit(1);
+                }
+            }
+            else {
+                std::cout << "Error: " << option << " is not a recognized option" << std::endl;
+                exit(1);
+            }
+        }
+
         if (sortMeth == "-quick") {
             captions.quickSort();
             std::vector<Caption> sortedCaptions = captions.getCaptions();
