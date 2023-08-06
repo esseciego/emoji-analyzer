@@ -37,8 +37,9 @@ int main(int argc, char* argv[]) {
     // Check help
     if ( (argc == 1) || ((std::string)argv[1] == "--help") && (argc == 2)) {
         std::cout << "THE EMOJI-ANALYZER" << std::endl;
-        std::cout << "An Instagram post analyzer — for emojis!" << std::endl;
+        std::cout << "An Instagram post analyzer, for emojis!" << std::endl;
         std::cout << "To get started, enter \"man\" in the command line to get a list of commands" << std::endl;
+        exit(0);
     }
 
     // 1st arg = Command
@@ -133,7 +134,7 @@ int main(int argc, char* argv[]) {
         if (sortMeth == "-quick") {
             captions.quickSort();
             std::vector<Caption> sortedCaptions = captions.getCaptions();
-            for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
+            for (int i = captions.getSize()-1; i > captions.getSize()-lines-1; i--) {
                 std::cout << "@" << sortedCaptions[i].getUsername() << std::endl;
                 std::cout << sortedCaptions[i].getPost() << std::endl;
                 std::cout << "Emojis used: " << sortedCaptions[i].getNumEmojis() << std::endl << std::endl;
@@ -145,8 +146,10 @@ int main(int argc, char* argv[]) {
         else if (sortMeth == "-merge") {
             captions.mergeSort();
             std::vector<Caption> sortedCaptions = captions.getCaptions();
-            for (int i = captions.getSize()-1; i > captions.getSize()-lines; i--) {
-                std::cout << sortedCaptions[i].getPost() << std::endl << std::endl;
+            for (int i = captions.getSize()-1; i > captions.getSize()-lines-1; i--) {
+                std::cout << "@" << sortedCaptions[i].getUsername() << std::endl;
+                std::cout << sortedCaptions[i].getPost() << std::endl;
+                std::cout << "Emojis used: " << sortedCaptions[i].getNumEmojis() << std::endl << std::endl;
             }
             std::cout << "Time elapsed: " << captions.getTime() << "ms" << std::endl;
             exit(0);
